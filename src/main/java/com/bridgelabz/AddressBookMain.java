@@ -91,5 +91,12 @@ public class AddressBookMain {
             return new Person("","","","","","","");
         }
 
+        public void deletePerson()
+        {
+            System.out.println("enter first name of person ");
+            String firstName = input.nextLine();
+            Person personToDelete = getObjectWithName(firstName);
+            personsList.remove(personToDelete);
+        }
     }
 }

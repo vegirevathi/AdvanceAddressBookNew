@@ -1,13 +1,19 @@
 package com.bridgelabz;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.Scanner;
+import java.util.*;
 
 public class AddressBookMain {
     static Scanner input = new Scanner(System.in);
     LinkedList<Person> personsList;
+    private final HashMap<String,ArrayList<Person>>cityMap;
+    private final HashMap<String,ArrayList<Person>>stateMap;
+
+    AddressBookMain()
+    {
+        cityMap=new HashMap<>();
+        stateMap=new HashMap<>();
+        personsList=new LinkedList<>();
+    }
 
     public void main(String[] args) throws Exception {
         System.out.println("Welcome to Advanced Address Book");
@@ -55,6 +61,12 @@ public class AddressBookMain {
                     Collections.sort(addressBook.personsList,new sortByZip());
                     break;
                 case 9:
+                    addressBook.viewPersonByCity();
+                    break;
+                case 10:
+                    addressBook.viewPersonByState();
+                    break;
+                case 11:
                     quit=true;
                     break;
             }
@@ -175,6 +187,39 @@ public class AddressBookMain {
         public int compare(Person person1,Person person2)
         {
             return person1.getZip().compareTo(person2.getZip());
+        }
+    }
+
+    public void viewPersonByCity()
+    {
+        System.out.println("enter city");
+        String city=input.nextLine();
+        displayValues(cityMap,city);
+    }
+
+    public void viewPersonByState()
+    {
+        System.out.println("enter state");
+        String state=input.nextLine();
+        displayValues(stateMap,state);
+    }
+
+    public void displayValues(HashMap<String,ArrayList<Person>> cityMap,String city)
+    {
+        Iterator it=cityMap.keySet().iterator();
+        ArrayList<Person> tempList=null;
+        while (it.hasNext())
+        {
+            String key=it.next().toString();
+            tempList=cityMap.get(city);
+            if(city.equals(key))
+            {
+                for(Person person:tempList)
+                {
+                    System.out.println(person);
+                }
+                break;
+            }
         }
     }
 }

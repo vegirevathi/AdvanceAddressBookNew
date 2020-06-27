@@ -27,6 +27,7 @@ public class AddressBookMain {
             System.out.println("enter phone number");
             String phoneNumber = input.nextLine();
             Person person1 = new Person(firstName, lastName, address, city, state, zip, phoneNumber);
+            personsList.add(person1);
         }
 
         public void editperson ()

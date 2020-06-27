@@ -28,6 +28,15 @@ public class AddressBookMain {
             String phoneNumber = input.nextLine();
             Person person1 = new Person(firstName, lastName, address, city, state, zip, phoneNumber);
             personsList.add(person1);
+            Person duplicate=getObjectWithName(firstName);
+            if(person1.equals(duplicate))
+            {
+                System.out.println("there already exists person  with same name in address book");
+                return;
+            }
+            personsList.add(person1);
+            addValues(cityMap,city,person1);
+            addValues(stateMap,state,person1);
         }
 
         public void editperson ()

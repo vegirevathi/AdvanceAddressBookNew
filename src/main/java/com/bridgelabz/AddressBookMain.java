@@ -1,6 +1,7 @@
 package com.bridgelabz;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -8,7 +9,7 @@ public class AddressBookMain {
     static Scanner input = new Scanner(System.in);
     LinkedList<Person> personsList;
 
-    public static void main(String[] args) throws Exception {
+    public void main(String[] args) throws Exception {
         System.out.println("Welcome to Advanced Address Book");
         boolean quit=false;
         AddressBookMain addressBook=new AddressBookMain();
@@ -45,6 +46,15 @@ public class AddressBookMain {
                     Collections.sort(addressBook.personsList);
                     break;
                 case 6:
+                    Collections.sort(addressBook.personsList,new sortByCity());
+                    break;
+                case 7:
+                    Collections.sort(addressBook.personsList,new sortByState());
+                    break;
+                case 8:
+                    Collections.sort(addressBook.personsList,new sortByZip());
+                    break;
+                case 9:
                     quit=true;
                     break;
             }
@@ -145,5 +155,26 @@ public class AddressBookMain {
         String firstName = input.nextLine();
         Person personToDelete = getObjectWithName(firstName);
         personsList.remove(personToDelete);
+    }
+
+    class sortByCity implements Comparator<Person> {
+        public int compare(Person person1,Person person2)
+        {
+            return person1.getCity().compareTo(person2.getCity());
+        }
+    }
+
+    class sortByState implements Comparator<Person> {
+        public int compare(Person person1,Person person2)
+        {
+            return person1.getState().compareTo(person2.getState());
+        }
+    }
+
+    class sortByZip implements Comparator<Person> {
+        public int compare(Person person1,Person person2)
+        {
+            return person1.getZip().compareTo(person2.getZip());
+        }
     }
 }

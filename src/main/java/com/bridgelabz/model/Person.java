@@ -1,19 +1,17 @@
-package com.bridgelabz;
+package com.bridgelabz.model;
 
 public class Person implements Comparable<Person> {
 
     private String firstName;
     private String lastName;
-    private String address;
     private String city;
     private String state;
     private String zip;
     private String phoneNumber;
 
-    Person(String firstName, String lastName, String address, String city, String state, String zip, String phoneNumber) {
+    public Person(String firstName, String lastName, String city, String state, String zip, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.address = address;
         this.city = city;
         this.state = state;
         this.zip = zip;
@@ -36,10 +34,6 @@ public class Person implements Comparable<Person> {
         this.city = city;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public void setState(String state) {
         this.state = state;
     }
@@ -60,10 +54,6 @@ public class Person implements Comparable<Person> {
         return lastName;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
     public String getCity() {
         return city;
     }
@@ -81,11 +71,6 @@ public class Person implements Comparable<Person> {
     }
 
     public String toString() {
-        return firstName + ", " + lastName + ", " + address + ", " + city + ", " + state + ", " + zip + ", " + phoneNumber;
+        return firstName + ", " + lastName + ", " + city + ", " + state + ", " + zip + ", " + phoneNumber;
     }
-
-    public boolean equals(Person obj) {
-        return this.firstName.equals(obj.firstName);
-    }
-
 }

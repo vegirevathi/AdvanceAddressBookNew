@@ -6,15 +6,15 @@ public class Person implements Comparable<Person> {
     private String lastName;
     private String city;
     private String state;
-    private String zip;
+    private String zipCode;
     private String phoneNumber;
 
-    public Person(String firstName, String lastName, String city, String state, String zip, String phoneNumber) {
+    public Person(String firstName, String lastName, String city, String state, String zipCode, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.city = city;
         this.state = state;
-        this.zip = zip;
+        this.zipCode = zipCode;
         this.phoneNumber = phoneNumber;
     }
 
@@ -38,8 +38,8 @@ public class Person implements Comparable<Person> {
         this.state = state;
     }
 
-    public void setZip(String zip) {
-        this.zip = zip;
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
     }
 
     public void setPhoneNumber(String phoneNumber) {
@@ -66,11 +66,11 @@ public class Person implements Comparable<Person> {
         return state;
     }
 
-    public String getZip() {
-        return zip;
+    public String getZipCode() {
+        return zipCode;
     }
 
     public String toString() {
-        return firstName + ", " + lastName + ", " + city + ", " + state + ", " + zip + ", " + phoneNumber;
+        return firstName + ", " + lastName + ", " + city + ", " + state + ", " + zipCode + ", " + phoneNumber;
     }
 }

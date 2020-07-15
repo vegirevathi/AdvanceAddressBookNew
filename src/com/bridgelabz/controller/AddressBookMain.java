@@ -7,12 +7,9 @@ import java.util.*;
 
 public class AddressBookMain {
     static Scanner input = new Scanner(System.in);
-    LinkedList<Person> personsList=new LinkedList<>();
-    private final HashMap<String, ArrayList<Person>>cityMap = new HashMap<>();
-    private final HashMap<String,ArrayList<Person>>stateMap = new HashMap<>();
 
     public static void main(String[] args) {
-        System.out.println("Welcome to Advanced Address Book");
+        System.out.println("Welcome to Address Book");
         boolean quit = false;
         AddressBookManager addressBook = new AddressBookManager();
         do{
@@ -52,13 +49,13 @@ public class AddressBookMain {
                     Collections.sort(addressBook.personsList);
                     break;
                 case 6:
-                    Collections.sort(addressBook.personsList, Comparator.comparing(person -> person.getCity()));
+                    Collections.sort(addressBook.personsList, Comparator.comparing(Person::getCity));
                     break;
                 case 7:
-                    Collections.sort(addressBook.personsList, Comparator.comparing(person -> person.getState()));
+                    Collections.sort(addressBook.personsList, Comparator.comparing(Person::getState));
                     break;
                 case 8:
-                    Collections.sort(addressBook.personsList, Comparator.comparing(person -> person.getZip()));
+                    Collections.sort(addressBook.personsList, Comparator.comparing(Person::getZipCode));
                     break;
                 case 9:
                     addressBook.viewPersonByCity();
@@ -67,7 +64,7 @@ public class AddressBookMain {
                     addressBook.viewPersonByState();
                     break;
                 case 11:
-                    System.exit(0);
+                    quit = true;
                     break;
                 default:
                     System.out.println("Select anything before you proceed");

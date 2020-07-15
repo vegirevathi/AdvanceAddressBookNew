@@ -5,7 +5,7 @@ import java.util.*;
 
 public class AddressBookManager implements IAddressBookManager {
     static Scanner input = new Scanner(System.in);
-    public LinkedList<Person> personsList=new LinkedList<>();
+    public List<Person> personsList = new ArrayList<>();
     private final HashMap<String,ArrayList<Person>>cityMap = new HashMap<>();
     private final HashMap<String,ArrayList<Person>>stateMap = new HashMap<>();
 
@@ -67,7 +67,7 @@ public class AddressBookManager implements IAddressBookManager {
                 case 3:
                     System.out.println("enter new zip");
                     String zip = input.nextLine();
-                    personToEdit.setZip(zip);
+                    personToEdit.setZipCode(zip);
                     break;
                 case 4:
                     System.out.println("enter new phone number");

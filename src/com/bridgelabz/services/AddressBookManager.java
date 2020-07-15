@@ -1,13 +1,14 @@
 package com.bridgelabz.services;
 
 import com.bridgelabz.model.Person;
+
 import java.util.*;
 
 public class AddressBookManager implements IAddressBookManager {
     static Scanner input = new Scanner(System.in);
     public List<Person> personsList = new ArrayList<>();
-    private final HashMap<String,ArrayList<Person>>cityMap = new HashMap<>();
-    private final HashMap<String,ArrayList<Person>>stateMap = new HashMap<>();
+    private final HashMap<String, ArrayList<Person>> cityMap = new HashMap<>();
+    private final HashMap<String, ArrayList<Person>> stateMap = new HashMap<>();
 
     public void displayAddressBook() {
         personsList.forEach(x -> {
@@ -16,17 +17,17 @@ public class AddressBookManager implements IAddressBookManager {
     }
 
     public void addPerson() {
-        System.out.println("enter first name");
+        System.out.println("Enter first name");
         String firstName = input.nextLine();
-        System.out.println("enter last name");
+        System.out.println("Enter last name");
         String lastName = input.nextLine();
-        System.out.println("enter city");
+        System.out.println("Enter city");
         String city = input.nextLine();
-        System.out.println("enter state");
+        System.out.println("Enter state");
         String state = input.nextLine();
-        System.out.println("enter zip");
+        System.out.println("Enter zip code");
         String zip = input.nextLine();
-        System.out.println("enter phone number");
+        System.out.println("Enter phone number");
         String phoneNumber = input.nextLine();
         Person person1 = new Person(firstName, lastName, city, state, zip, phoneNumber);
         Person duplicateName = getObjectWithName(firstName);
@@ -36,8 +37,8 @@ public class AddressBookManager implements IAddressBookManager {
             return;
         }
         personsList.add(person1);
-        addValuesCity(cityMap,city,person1);
-        addValuesState(stateMap,state,person1);
+        addValuesCity(cityMap, city, person1);
+        addValuesState(stateMap, state, person1);
     }
 
     public void editPerson() {
@@ -85,18 +86,14 @@ public class AddressBookManager implements IAddressBookManager {
 
     public Person getObjectWithName(String firstName) {
         for (Person person : personsList) {
-            if (person.getFirstName().equals(firstName)) {
-                return person;
-            }
+            if (person.getFirstName().equals(firstName)) return person;
         }
         return new Person("", "", "", "", "", "");
     }
 
     public Person getObjectWithPhoneNumber(String phoneNumber) {
         for (Person person : personsList) {
-            if (person.getPhoneNumber().equals(phoneNumber)) {
-                return person;
-            }
+            if (person.getPhoneNumber().equals(phoneNumber)) return person;
         }
         return new Person("", "", "", "", "", "");
     }
@@ -108,46 +105,37 @@ public class AddressBookManager implements IAddressBookManager {
         personsList.remove(personToDelete);
     }
 
-    public void viewPersonByCity()
-    {
+    public void viewPersonByCity() {
         System.out.println("enter city");
         String city = input.nextLine();
-        displayValuesCity(cityMap,city);
+        displayValuesCity(cityMap, city);
     }
 
-    public void viewPersonByState()
-    {
+    public void viewPersonByState() {
         System.out.println("enter state");
         String state = input.nextLine();
-        displayValuesState(stateMap,state);
+        displayValuesState(stateMap, state);
     }
 
-    public void addValuesCity(HashMap<String,ArrayList<Person>> cityMap,String key,Person person)
-    {
+    public void addValuesCity(HashMap<String, ArrayList<Person>> cityMap, String key, Person person) {
         ArrayList<Person> tempList;
-        if(cityMap.containsKey(key))
-        {
+        if (cityMap.containsKey(key)) {
             tempList = cityMap.get(key);
             tempList.add(person);
-        }
-        else
-        {
+        } else {
             tempList = new ArrayList<>();
             tempList.add(person);
         }
-        cityMap.put(key,tempList);
+        cityMap.put(key, tempList);
     }
 
-    public void displayValuesCity(HashMap<String,ArrayList<Person>> cityMap,String city)
-    {
+    public void displayValuesCity(HashMap<String, ArrayList<Person>> cityMap, String city) {
         Iterator iterator = cityMap.keySet().iterator();
         ArrayList<Person> tempList;
-        while (iterator.hasNext())
-        {
+        while (iterator.hasNext()) {
             String key = iterator.next().toString();
             tempList = cityMap.get(city);
-            if(city.equals(key))
-            {
+            if (city.equals(key)) {
                 tempList.forEach(x -> {
                     System.out.println(x);
                 });
@@ -156,32 +144,25 @@ public class AddressBookManager implements IAddressBookManager {
         }
     }
 
-    public void addValuesState(HashMap<String,ArrayList<Person>> stateMap,String key,Person person)
-    {
+    public void addValuesState(HashMap<String, ArrayList<Person>> stateMap, String key, Person person) {
         ArrayList<Person> tempList;
-        if(stateMap.containsKey(key))
-        {
+        if (stateMap.containsKey(key)) {
             tempList = stateMap.get(key);
             tempList.add(person);
-        }
-        else
-        {
+        } else {
             tempList = new ArrayList<>();
             tempList.add(person);
         }
-        stateMap.put(key,tempList);
+        stateMap.put(key, tempList);
     }
 
-    public void displayValuesState(HashMap<String,ArrayList<Person>> stateMap,String state)
-    {
+    public void displayValuesState(HashMap<String, ArrayList<Person>> stateMap, String state) {
         Iterator iterator = stateMap.keySet().iterator();
         ArrayList<Person> tempList;
-        while (iterator.hasNext())
-        {
+        while (iterator.hasNext()) {
             String key = iterator.next().toString();
             tempList = stateMap.get(state);
-            if(state.equals(key))
-            {
+            if (state.equals(key)) {
                 tempList.forEach(x -> {
                     System.out.println(x);
                 });

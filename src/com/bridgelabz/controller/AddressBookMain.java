@@ -12,7 +12,7 @@ public class AddressBookMain {
         System.out.println("Welcome to Address Book");
         boolean quit = false;
         AddressBookManager addressBook = new AddressBookManager();
-        do{
+        do {
             System.out.println("enter 1 for adding person to address book");
             System.out.println("enter 2 for editing person");
             System.out.println("enter 3 for deleting a person");
@@ -24,7 +24,7 @@ public class AddressBookMain {
             System.out.println("enter 9 to view person by city");
             System.out.println("enter 10 to view person by state");
             System.out.println("enter 11 to quit");
-            int option=input.nextInt();
+            int option = input.nextInt();
             input.nextLine();
             switch (option) {
                 case 1:
@@ -70,7 +70,7 @@ public class AddressBookMain {
                     System.out.println("Select anything before you proceed");
                     break;
             }
-        }while (!quit);
+        } while (!quit);
     }
 
 }

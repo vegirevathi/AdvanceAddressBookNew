@@ -2,6 +2,7 @@ package com.bridgelabz.controller;
 
 import com.bridgelabz.model.Person;
 import com.bridgelabz.services.AddressBookManager;
+import com.bridgelabz.utility.JSONOperations;
 
 import java.util.*;
 
@@ -23,7 +24,8 @@ public class AddressBookMain {
             System.out.println("enter 8 to sort address book contacts by zip");
             System.out.println("enter 9 to view person by city");
             System.out.println("enter 10 to view person by state");
-            System.out.println("enter 11 to quit");
+            System.out.println("enter 11 to search person by city or state");
+            System.out.println("enter 12 to quit");
             int option = input.nextInt();
             input.nextLine();
             switch (option) {
@@ -49,13 +51,13 @@ public class AddressBookMain {
                     Collections.sort(addressBook.personsList);
                     break;
                 case 6:
-                    Collections.sort(addressBook.personsList, Comparator.comparing(Person::getCity));
+                    addressBook.personsList.sort(Comparator.comparing(Person::getCity));
                     break;
                 case 7:
-                    Collections.sort(addressBook.personsList, Comparator.comparing(Person::getState));
+                    addressBook.personsList.sort(Comparator.comparing(Person::getState));
                     break;
                 case 8:
-                    Collections.sort(addressBook.personsList, Comparator.comparing(Person::getZipCode));
+                    addressBook.personsList.sort(Comparator.comparing(Person::getZipCode));
                     break;
                 case 9:
                     addressBook.viewPersonByCity();
@@ -64,6 +66,9 @@ public class AddressBookMain {
                     addressBook.viewPersonByState();
                     break;
                 case 11:
+                    addressBook.searchPersonByCityOrState();
+                    break;
+                case 12:
                     quit = true;
                     break;
                 default:

@@ -1,19 +1,11 @@
 package com.bridgelabz.model;
 
-import com.opencsv.bean.CsvBindByName;
-
-public class Person implements Comparable<Person> {
-    @CsvBindByName
+public class Person {
     public String firstName;
-    @CsvBindByName
     public String lastName;
-    @CsvBindByName
     public String city;
-    @CsvBindByName
     public String state;
-    @CsvBindByName
     public String zipCode;
-    @CsvBindByName
     public String phoneNumber;
 
     public Person() {
@@ -26,10 +18,6 @@ public class Person implements Comparable<Person> {
         this.state = state;
         this.zipCode = zipCode;
         this.phoneNumber = phoneNumber;
-    }
-
-    public int compareTo(Person person) {
-        return this.firstName.compareTo(person.firstName);
     }
 
     public void setCity(String city) {
@@ -52,6 +40,10 @@ public class Person implements Comparable<Person> {
         return firstName;
     }
 
+    public String getLastName() {
+        return lastName;
+    }
+
     public String getCity() {
         return city;
     }
@@ -68,7 +60,15 @@ public class Person implements Comparable<Person> {
         return zipCode;
     }
 
+    @Override
     public String toString() {
-        return firstName + ", " + lastName + ", " + city + ", " + state + ", " + zipCode + ", " + phoneNumber;
+        return "Person{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", zipCode='" + zipCode + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                '}';
     }
 }

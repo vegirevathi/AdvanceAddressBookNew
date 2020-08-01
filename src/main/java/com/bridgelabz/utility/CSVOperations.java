@@ -20,7 +20,7 @@ public class CSVOperations implements IFileOperator {
     @Override
     public void fileWriter(List<Person> addressBook, String filePath) {
         try (Writer writer = Files.newBufferedWriter(Paths.get(filePath))) {
-            StatefulBeanToCsv beanToCsv = new StatefulBeanToCsvBuilder(writer)
+            StatefulBeanToCsv<Person> beanToCsv = new StatefulBeanToCsvBuilder(writer)
                     .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
                     .build();
             beanToCsv.write(addressBook);
@@ -37,9 +37,9 @@ public class CSVOperations implements IFileOperator {
             String[] nextRecord;
             while ((nextRecord = csvReader.readNext()) != null) {
                 personsList.add(new Person(nextRecord[0], nextRecord[1], nextRecord[2],
-                                        nextRecord[3], nextRecord[4], nextRecord[5]));
+                        nextRecord[3], nextRecord[4], nextRecord[5]));
             }
-        } catch (IOException e) {
+        } catch (IOException e ) {
             e.printStackTrace();
         }
         return personsList;

@@ -14,4 +14,12 @@ public interface IAddressBookManager {
     void viewPersonByState();
 
     void searchPersonByCityOrState();
+
+    void sortByName();
+
+    void sortByCity();
+
+    void sortByZipCode();
+
+    void sortByState();
 }

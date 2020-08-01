@@ -1,11 +1,8 @@
 package com.bridgelabz.controller;
 
-import com.bridgelabz.model.Person;
 import com.bridgelabz.services.AddressBookManager;
-import com.bridgelabz.services.IAddressBookManager;
 import com.bridgelabz.utility.CSVOperations;
 import com.bridgelabz.utility.GSONOperations;
-import com.bridgelabz.utility.IFileOperator;
 import com.bridgelabz.utility.JSONOperations;
 
 import java.util.*;
@@ -17,7 +14,7 @@ public class AddressBookMain {
         System.out.println("Welcome to Address Book");
 
         AddressBookManager addressBook = new AddressBookManager();
-        System.out.println("Select Read and Write File Operation/n 1. JSON File /n 2. CSV File ");
+        System.out.println("Select Read and Write File Operation/n 1. JSON File /n 2. CSV File /n 3. GSON File");
         int option = input.nextInt();
         input.nextLine();
         switch (option) {
@@ -28,7 +25,7 @@ public class AddressBookMain {
                  addressBook = new AddressBookManager(new CSVOperations(), "AddressBook.csv");
                 break;
             case 3:
-                addressBook = new AddressBookManager(new GSONOperations(), "AddressBookGSON.json");
+                addressBook = new AddressBookManager(new GSONOperations(), "AddressBookLibrary.json");
                 break;
             default:
                 System.out.println("Wrong Entry");
@@ -70,16 +67,16 @@ public class AddressBookMain {
                     System.out.println("All contacts are shown");
                     break;
                 case 5:
-                    Collections.sort(addressBook.personsList);
+                    addressBook.sortByName();
                     break;
                 case 6:
-                    addressBook.personsList.sort(Comparator.comparing(Person::getCity));
+                    addressBook.sortByCity();
                     break;
                 case 7:
-                    addressBook.personsList.sort(Comparator.comparing(Person::getState));
+                    addressBook.sortByState();
                     break;
                 case 8:
-                    addressBook.personsList.sort(Comparator.comparing(Person::getZipCode));
+                    addressBook.sortByZipCode();
                     break;
                 case 9:
                     addressBook.viewPersonByCity();

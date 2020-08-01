@@ -4,6 +4,7 @@ import com.bridgelabz.model.Person;
 import com.bridgelabz.services.AddressBookManager;
 import com.bridgelabz.services.IAddressBookManager;
 import com.bridgelabz.utility.CSVOperations;
+import com.bridgelabz.utility.GSONOperations;
 import com.bridgelabz.utility.IFileOperator;
 import com.bridgelabz.utility.JSONOperations;
 
@@ -25,6 +26,9 @@ public class AddressBookMain {
                 break;
             case 2:
                  addressBook = new AddressBookManager(new CSVOperations(), "AddressBook.csv");
+                break;
+            case 3:
+                addressBook = new AddressBookManager(new GSONOperations(), "AddressBookGSON.json");
                 break;
             default:
                 System.out.println("Wrong Entry");

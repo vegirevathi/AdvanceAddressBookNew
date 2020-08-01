@@ -1,12 +1,19 @@
 package com.bridgelabz.model;
 
-public class Person implements Comparable<Person> {
+import com.opencsv.bean.CsvBindByName;
 
+public class Person implements Comparable<Person> {
+    @CsvBindByName
     public String firstName;
+    @CsvBindByName
     public String lastName;
+    @CsvBindByName
     public String city;
+    @CsvBindByName
     public String state;
+    @CsvBindByName
     public String zipCode;
+    @CsvBindByName
     public String phoneNumber;
 
     public Person() {

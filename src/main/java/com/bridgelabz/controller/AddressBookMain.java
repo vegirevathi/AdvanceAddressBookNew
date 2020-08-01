@@ -2,6 +2,9 @@ package com.bridgelabz.controller;
 
 import com.bridgelabz.model.Person;
 import com.bridgelabz.services.AddressBookManager;
+import com.bridgelabz.services.IAddressBookManager;
+import com.bridgelabz.utility.CSVOperations;
+import com.bridgelabz.utility.IFileOperator;
 import com.bridgelabz.utility.JSONOperations;
 
 import java.util.*;
@@ -11,8 +14,23 @@ public class AddressBookMain {
 
     public static void main(String[] args) {
         System.out.println("Welcome to Address Book");
-        boolean quit = false;
+
         AddressBookManager addressBook = new AddressBookManager();
+        System.out.println("Select Read and Write File Operation/n 1. JSON File /n 2. CSV File ");
+        int option = input.nextInt();
+        input.nextLine();
+        switch (option) {
+            case 1:
+                 addressBook = new AddressBookManager(new JSONOperations(), "AddressBook.json");
+                break;
+            case 2:
+                 addressBook = new AddressBookManager(new CSVOperations(), "AddressBook.csv");
+                break;
+            default:
+                System.out.println("Wrong Entry");
+                break;
+        }
+        boolean quit = false;
         do {
             System.out.println("enter 1 for adding person to address book");
             System.out.println("enter 2 for editing person");
@@ -26,7 +44,7 @@ public class AddressBookMain {
             System.out.println("enter 10 to view person by state");
             System.out.println("enter 11 to search person by city or state");
             System.out.println("enter 12 to quit");
-            int option = input.nextInt();
+            option = input.nextInt();
             input.nextLine();
             switch (option) {
                 case 1:

@@ -1,6 +1,7 @@
 package com.bridgelabz.services;
 
 import com.bridgelabz.model.Person;
+import com.bridgelabz.utility.IFileOperator;
 import com.bridgelabz.utility.JSONOperations;
 
 import java.util.*;
@@ -9,9 +10,18 @@ import java.util.stream.Collectors;
 public class AddressBookManager implements IAddressBookManager {
     static Scanner input = new Scanner(System.in);
 
-    String addressBookFilePath = "AddressBook.json";
-    JSONOperations jsonOperations = new JSONOperations();
-    public List<Person> personsList = jsonOperations.jsonFileReader(addressBookFilePath);
+    String filePath;
+    IFileOperator fileOperator;
+    public List<Person> personsList;
+
+    public AddressBookManager(IFileOperator fileOperator, String filePath) {
+        this.fileOperator = fileOperator;
+        this.filePath = filePath;
+        this.personsList = fileOperator.fileReader(filePath);
+    }
+
+    public AddressBookManager() {
+    }
 
     public void displayAddressBook() {
         personsList.forEach(System.out::println);
@@ -38,7 +48,7 @@ public class AddressBookManager implements IAddressBookManager {
         }
         personsList.add(person1);
         List<Person> collect = personsList.stream().distinct().collect(Collectors.toList());
-        jsonOperations.jsonFileWriter(collect, addressBookFilePath);
+        fileOperator.fileWriter(collect, filePath);
     }
 
     public void editPerson() {
@@ -83,7 +93,7 @@ public class AddressBookManager implements IAddressBookManager {
                     break;
             }
         } while (!quit);
-        jsonOperations.jsonFileWriter(personsList, addressBookFilePath);
+        fileOperator.fileWriter(personsList, filePath);
     }
 
     public void deletePerson() {
@@ -94,11 +104,11 @@ public class AddressBookManager implements IAddressBookManager {
         Person personToDelete = personsList.stream().filter(person -> person.firstName.equals(firstName)
                 && person.lastName.equals(lastName)).findFirst().orElse(null);
         personsList.remove(personToDelete);
-        jsonOperations.jsonFileWriter(personsList, addressBookFilePath);
+        fileOperator.fileWriter(personsList, filePath);
     }
 
     public void viewPersonByCity() {
-        List<Person> personsList = jsonOperations.jsonFileReader(addressBookFilePath);
+        List<Person> personsList = fileOperator.fileReader(filePath);
         System.out.println("enter city");
         String city = input.nextLine();
         Person viewPersonByCity = personsList.stream().filter(person -> person.city.equals(city))
@@ -107,7 +117,7 @@ public class AddressBookManager implements IAddressBookManager {
     }
 
     public void viewPersonByState() {
-        List<Person> personsList = jsonOperations.jsonFileReader(addressBookFilePath);
+        List<Person> personsList = fileOperator.fileReader(filePath);
         System.out.println("enter state");
         String state = input.nextLine();
         Person viewPersonByState = personsList.stream().filter(person -> person.state.equals(state))
@@ -116,7 +126,7 @@ public class AddressBookManager implements IAddressBookManager {
     }
 
     public void searchPersonByCityOrState() {
-        List<Person> personsList = jsonOperations.jsonFileReader(addressBookFilePath);
+        List<Person> personsList = fileOperator.fileReader(filePath);
         System.out.println("enter city or state");
         String cityOrState = input.nextLine();
         Person searchPersonByCityOrState = personsList.stream().filter(person -> person.city.equals(cityOrState)

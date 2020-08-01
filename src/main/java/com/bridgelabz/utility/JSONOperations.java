@@ -13,8 +13,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JSONOperations {
-    public void jsonFileWriter(List<Person> addressBook, String jsonFilePath) {
+public class JSONOperations implements IFileOperator {
+    @Override
+    public void fileWriter(List<Person> addressBook, String filePath) {
         JSONArray personList = new JSONArray();
         addressBook.forEach(person -> {
             JSONObject personDetails = new JSONObject();
@@ -29,7 +30,7 @@ public class JSONOperations {
             personList.add(personObject);
         });
         try {
-            FileWriter fileWriter = new FileWriter(jsonFilePath);
+            FileWriter fileWriter = new FileWriter(filePath);
             fileWriter.append(personList.toJSONString());
             fileWriter.flush();
         } catch (IOException e) {
@@ -37,11 +38,12 @@ public class JSONOperations {
         }
     }
 
-    public List<Person> jsonFileReader(String jsonFilePath) {
+    @Override
+    public List<Person> fileReader(String filePath) {
         JSONParser jsonParser = new JSONParser();
         List<Person> addressBook = new ArrayList<>();
         try {
-            FileReader fileReader = new FileReader(jsonFilePath);
+            FileReader fileReader = new FileReader(filePath);
             Object obj = jsonParser.parse(fileReader);
             JSONArray personList = (JSONArray) obj;
             personList.forEach(person -> addressBook.add(parsePersonObject((JSONObject) person)));

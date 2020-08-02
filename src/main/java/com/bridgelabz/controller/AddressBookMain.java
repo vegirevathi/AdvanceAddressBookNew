@@ -19,10 +19,10 @@ public class AddressBookMain {
         input.nextLine();
         switch (option) {
             case 1:
-                 addressBook = new AddressBookManager(new JSONOperations(), "AddressBook.json");
+                addressBook = new AddressBookManager(new JSONOperations(), "AddressBook.json");
                 break;
             case 2:
-                 addressBook = new AddressBookManager(new CSVOperations(), "AddressBook.csv");
+                addressBook = new AddressBookManager(new CSVOperations(), "AddressBook.csv");
                 break;
             case 3:
                 addressBook = new AddressBookManager(new GSONOperations(), "AddressBookLibrary.json");

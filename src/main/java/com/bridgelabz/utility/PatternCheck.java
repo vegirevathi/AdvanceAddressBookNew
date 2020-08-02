@@ -4,15 +4,15 @@ import java.util.Scanner;
 
 public class PatternCheck {
     private static final String NAME_REGEX = "^[A-Z][a-z]{2,}$";
-    private static final String ZIP_CODE_REGEX = "^[0-9]{6}$";
-    private static final String PHONE_NUMBER_REGEX = "^[0-9]{2}+[ ]+[0-9]{10}$";
+    private static final String ZIP_CODE_REGEX = "^[1-9][0-9]{5}$";
+    private static final String PHONE_NUMBER_REGEX = "^[1-9][0-9]+[ ]?+[1-9][0-9]{9}$";
     static Scanner input = new Scanner(System.in);
 
     public String setName(String name) {
         String firstName = input.nextLine();
         if (firstName.matches(NAME_REGEX))
             return firstName;
-        System.out.println("Invalid!!! Enter" +name+ "again");
+        System.out.println("Invalid!!! Enter" + name + "again");
         return setName(name);
     }
 

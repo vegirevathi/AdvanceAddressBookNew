@@ -39,7 +39,7 @@ public class CSVOperations implements IFileOperator {
                 personsList.add(new Person(nextRecord[0], nextRecord[1], nextRecord[2],
                         nextRecord[3], nextRecord[4], nextRecord[5]));
             }
-        } catch (IOException e ) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return personsList;

@@ -43,7 +43,7 @@ public class AddressBookManager implements IAddressBookManager {
         String phoneNumber = patternCheck.setPhoneNumber();
         Person person1 = new Person(firstName, lastName, city, state, zipCode, phoneNumber);
         for (Person person : personsList) {
-            if (person.getFirstName().equals(firstName) && person.getPhoneNumber().equals(phoneNumber)) {
+            if (person.getFirstName().equalsIgnoreCase(firstName) && person.getPhoneNumber().equals(phoneNumber)) {
                 System.out.println("This contact is already existed with same name and phone number in address book");
                 return;
             }
@@ -58,8 +58,8 @@ public class AddressBookManager implements IAddressBookManager {
         String firstName = input.nextLine();
         System.out.println("enter last name of person ");
         String lastName = input.nextLine();
-        Person personToEdit = personsList.stream().filter(person -> person.firstName.equals(firstName)
-                && person.getLastName().equals(lastName)).findFirst().orElse(null);
+        Person personToEdit = personsList.stream().filter(person -> person.firstName.equalsIgnoreCase(firstName)
+                && person.getLastName().equalsIgnoreCase(lastName)).findFirst().orElse(null);
         boolean quit = false;
         do {
             System.out.println("enter 1 for editing city");
@@ -103,8 +103,8 @@ public class AddressBookManager implements IAddressBookManager {
         String firstName = input.nextLine();
         System.out.println("enter last name of person ");
         String lastName = input.nextLine();
-        Person personToDelete = personsList.stream().filter(person -> person.firstName.equals(firstName)
-                && person.lastName.equals(lastName)).findFirst().orElse(null);
+        Person personToDelete = personsList.stream().filter(person -> person.firstName.equalsIgnoreCase(firstName)
+                && person.lastName.equalsIgnoreCase(lastName)).findFirst().orElse(null);
         personsList.remove(personToDelete);
         fileOperator.fileWriter(personsList, filePath);
     }
@@ -113,7 +113,7 @@ public class AddressBookManager implements IAddressBookManager {
         List<Person> personsList = fileOperator.fileReader(filePath);
         System.out.println("enter city");
         String city = input.nextLine();
-        Person viewPersonByCity = personsList.stream().filter(person -> person.city.equals(city))
+        Person viewPersonByCity = personsList.stream().filter(person -> person.city.equalsIgnoreCase(city))
                 .findFirst().orElse(null);
         System.out.println(viewPersonByCity);
     }
@@ -122,7 +122,7 @@ public class AddressBookManager implements IAddressBookManager {
         List<Person> personsList = fileOperator.fileReader(filePath);
         System.out.println("enter state");
         String state = input.nextLine();
-        Person viewPersonByState = personsList.stream().filter(person -> person.state.equals(state))
+        Person viewPersonByState = personsList.stream().filter(person -> person.state.equalsIgnoreCase(state))
                 .findFirst().orElse(null);
         System.out.println(viewPersonByState);
     }
@@ -131,8 +131,8 @@ public class AddressBookManager implements IAddressBookManager {
         List<Person> personsList = fileOperator.fileReader(filePath);
         System.out.println("enter city or state");
         String cityOrState = input.nextLine();
-        Person searchPersonByCityOrState = personsList.stream().filter(person -> person.city.equals(cityOrState)
-                || person.state.equals(cityOrState)).findFirst().orElse(null);
+        Person searchPersonByCityOrState = personsList.stream().filter(person -> person.city.equalsIgnoreCase(cityOrState)
+                || person.state.equalsIgnoreCase(cityOrState)).findFirst().orElse(null);
         System.out.println(searchPersonByCityOrState);
     }
 

@@ -2,12 +2,14 @@ package com.bridgelabz.services;
 
 import com.bridgelabz.model.Person;
 import com.bridgelabz.utility.IFileOperator;
+import com.bridgelabz.utility.PatternCheck;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class AddressBookManager implements IAddressBookManager {
     static Scanner input = new Scanner(System.in);
+    PatternCheck patternCheck = new PatternCheck();
 
     String filePath;
     IFileOperator fileOperator;
@@ -27,19 +29,19 @@ public class AddressBookManager implements IAddressBookManager {
     }
 
     public void addPerson() {
-        System.out.println("Enter first name");
-        String firstName = input.nextLine();
-        System.out.println("Enter last name");
-        String lastName = input.nextLine();
-        System.out.println("Enter city");
-        String city = input.nextLine();
-        System.out.println("Enter state");
-        String state = input.nextLine();
-        System.out.println("Enter zip code");
-        String zip = input.nextLine();
+        System.out.println("enter first name of person ");
+        String firstName = patternCheck.setName("firstName");
+        System.out.println("enter last name of person ");
+        String lastName = patternCheck.setName("lastName");
+        System.out.println("enter city");
+        String city = patternCheck.setName("city");
+        System.out.println("enter state");
+        String state = patternCheck.setName("state");
+        System.out.println("enter zip code");
+        String zipCode = patternCheck.setNumber();
         System.out.println("Enter phone number");
-        String phoneNumber = input.nextLine();
-        Person person1 = new Person(firstName, lastName, city, state, zip, phoneNumber);
+        String phoneNumber = patternCheck.setPhoneNumber();
+        Person person1 = new Person(firstName, lastName, city, state, zipCode, phoneNumber);
         for (Person person : personsList) {
             if (person.getFirstName().equals(firstName) && person.getPhoneNumber().equals(phoneNumber)) {
                 System.out.println("This contact is already existed with same name and phone number in address book");

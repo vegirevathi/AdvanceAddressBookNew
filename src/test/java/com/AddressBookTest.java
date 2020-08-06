@@ -45,6 +45,5 @@ public class AddressBookTest {
         Response response = RestAssured.delete("/addressBook/delete/3");
         response.then().body("id", Matchers.not(2));
     }
-
 }
 

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.AddressBookTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-08-03T16:14:35" hostname="DESKTOP-VQ43AH5" time="22.652">
+  <properties/>
+  <testcase name="givenPerson_WhenPresent_ShouldReturnDetails" classname="com.AddressBookTest" time="22.652"/>
+  <system-out><![CDATA[[
+  {
+    "firstName": "Vegi",
+    "lastName": "Revathi",
+    "city": "Vizag",
+    "state": "Andhra",
+    "zipCode": "412314",
+    "phone": "8888888888",
+    "id": 1
+  },
+  {
+    "id": 2,
+    "firstName": "Abhishek",
+    "lastName": "Bachhan",
+    "city": "mumbai",
+    "state": "mh",
+    "zipCode": "110111",
+    "phone": "2222222212"
+  },
+  {
+    "firstName": "Vaibhav",
+    "lastName": "Singh",
+    "city": "korba",
+    "state": "cg",
+    "zipCode": "456737",
+    "phone": "8967654398",
+    "id": 4
+  },
+  {
+    "firstName": "Vaibhav",
+    "lastName": "Singh",
+    "city": "korba",
+    "state": "cg",
+    "zipCode": "456737",
+    "phone": "8967654398",
+    "id": 5
+  },
+  {
+    "firstName": "Vaibhav",
+    "lastName": "Singh",
+    "city": "korba",
+    "state": "cg",
+    "zipCode": "456737",
+    "phone": "8967654398",
+    "id": 6
+  }
+]
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

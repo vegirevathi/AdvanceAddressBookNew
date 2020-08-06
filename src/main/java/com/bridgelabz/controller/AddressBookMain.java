@@ -14,18 +14,24 @@ public class AddressBookMain {
         System.out.println("Welcome to Address Book");
 
         AddressBookManager addressBook = new AddressBookManager();
+        CSVOperations csvOperations = new CSVOperations();
+        csvOperations.start();
+        JSONOperations jsonOperations = new JSONOperations();
+        jsonOperations.start();
+        GSONOperations gsonOperations = new GSONOperations();
+        gsonOperations.start();
         System.out.println("Select Read and Write File Operation/n 1. JSON File /n 2. CSV File /n 3. GSON File");
         int option = input.nextInt();
         input.nextLine();
         switch (option) {
             case 1:
-                addressBook = new AddressBookManager(new JSONOperations(), "AddressBook.json");
+                addressBook = new AddressBookManager(jsonOperations, "AddressBook.json");
                 break;
             case 2:
-                addressBook = new AddressBookManager(new CSVOperations(), "AddressBook.csv");
+                addressBook = new AddressBookManager(csvOperations, "AddressBook.csv");
                 break;
             case 3:
-                addressBook = new AddressBookManager(new GSONOperations(), "AddressBookLibrary.json");
+                addressBook = new AddressBookManager(gsonOperations, "AddressBookLibrary.json");
                 break;
             default:
                 System.out.println("Wrong Entry");

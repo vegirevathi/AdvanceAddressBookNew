@@ -16,7 +16,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CSVOperations implements IFileOperator {
+public class CSVOperations extends Thread implements IFileOperator {
     @Override
     public void fileWriter(List<Person> addressBook, String filePath) {
         try (Writer writer = Files.newBufferedWriter(Paths.get(filePath))) {
@@ -39,9 +39,15 @@ public class CSVOperations implements IFileOperator {
                 personsList.add(new Person(nextRecord[0], nextRecord[1], nextRecord[2],
                         nextRecord[3], nextRecord[4], nextRecord[5]));
             }
-        } catch (IOException e) {
+        } catch (IOException | ArrayIndexOutOfBoundsException e) {
             e.printStackTrace();
         }
         return personsList;
+    }
+
+    @Override
+    public void run() {
+        this.fileReader("C:\\Users\\Revathi\\IdeaProjects\\NewNewAddressProblem\\AddressBook.json");
+        this.fileWriter(new ArrayList<>(), "C:\\Users\\Revathi\\IdeaProjects\\NewNewAddressProblem\\AddressBook.json");
     }
 }

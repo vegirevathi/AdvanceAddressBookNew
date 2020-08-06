@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class GSONOperations implements IFileOperator {
+public class GSONOperations extends Thread implements IFileOperator {
     @Override
     public void fileWriter(List<Person> addressBook, String filePath) {
         String personDetails = new Gson().toJson(addressBook);
@@ -29,5 +29,11 @@ public class GSONOperations implements IFileOperator {
             e.printStackTrace();
         }
         return addressBook;
+    }
+
+    @Override
+    public void run() {
+        this.fileReader("C:\\Users\\Revathi\\IdeaProjects\\NewNewAddressProblem\\AddressBook.json");
+        this.fileWriter(new ArrayList<>(), "C:\\Users\\Revathi\\IdeaProjects\\NewNewAddressProblem\\AddressBook.json");
     }
 }

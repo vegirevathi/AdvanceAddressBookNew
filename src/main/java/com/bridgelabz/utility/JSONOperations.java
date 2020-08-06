@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JSONOperations implements IFileOperator {
+public class JSONOperations extends Thread implements IFileOperator {
     @Override
     public void fileWriter(List<Person> addressBook, String filePath) {
         JSONArray personList = new JSONArray();
@@ -63,5 +63,11 @@ public class JSONOperations implements IFileOperator {
         person.state = (String) personObject.get("State");
         person.zipCode = (String) personObject.get("Zipcode");
         return person;
+    }
+
+    @Override
+    public void run() {
+        this.fileReader("C:\\Users\\Revathi\\IdeaProjects\\NewNewAddressProblem\\AddressBook.json");
+        this.fileWriter(new ArrayList<>(), "C:\\Users\\Revathi\\IdeaProjects\\NewNewAddressProblem\\AddressBook.json");
     }
 }

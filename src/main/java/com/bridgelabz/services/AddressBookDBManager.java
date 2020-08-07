@@ -1,39 +1,31 @@
 package com.bridgelabz.services;
 
 import com.bridgelabz.repository.DBConnection;
-import com.bridgelabz.utility.PatternCheck;
 
 import java.sql.*;
 import java.util.Scanner;
 
 public class AddressBookDBManager {
     static Scanner input = new Scanner(System.in);
-    PatternCheck patternCheck = new PatternCheck();
     private PreparedStatement preparedStatement;
 
     public void addPerson() {
         System.out.println("enter first name of person ");
-        //String firstName = patternCheck.setName("firstName");
         String firstName = input.nextLine();
         System.out.println("enter last name of person ");
-        //String lastName = patternCheck.setName("lastName");
         String lastName = input.nextLine();
         System.out.println("enter city");
-        //String city = patternCheck.setName("city");
         String city = input.nextLine();
         System.out.println("enter state");
-        //String state = patternCheck.setName("state");
         String state = input.nextLine();
         System.out.println("enter zip code");
-        //String zipCode = patternCheck.setNumber();
         String zipCode = input.nextLine();
         System.out.println("Enter phone number");
-        //String phoneNumber = patternCheck.setPhoneNumber();
         String phoneNumber = input.nextLine();
 
-        String INSERT_ADD_QUERY = "INSERT INTO addressbooknew.person(first_name,last_name,city,state,zip_code,phone_number) VALUES(?,?,?,?,?,?)";
+        String addQuery = "INSERT INTO addressbooknew.person(first_name,last_name,city,state,zip_code,phone_number) VALUES(?,?,?,?,?,?)";
         try (Connection connection = DBConnection.getConnection()) {
-            preparedStatement = connection.prepareStatement(INSERT_ADD_QUERY);
+            preparedStatement = connection.prepareStatement(addQuery);
             preparedStatement.setString(1, firstName);
             preparedStatement.setString(2, lastName);
             preparedStatement.setString(3, city);
@@ -65,26 +57,26 @@ public class AddressBookDBManager {
                 case 1:
                     System.out.println("enter new city");
                     String newCity = input.nextLine();
-                    String EDIT_QUERY = "UPDATE addressbooknew.person SET city =" +newCity+ "WHERE first_name = " +firstName+ "AND last_name = " +lastName;
-                    this.editDatabase(EDIT_QUERY);
+                    String editQuery = "UPDATE addressbooknew.person SET city =" +newCity+ "WHERE first_name = " +firstName+ "AND last_name = " +lastName;
+                    this.editDatabase(editQuery);
                     break;
                 case 2:
                     System.out.println("enter new state");
                     String newState = input.nextLine();
-                    EDIT_QUERY = "UPDATE addressbooknew.person SET state =" + newState + "WHERE first_name = " + firstName + "AND last_name = " + lastName;
-                    this.editDatabase(EDIT_QUERY);
+                    editQuery = "UPDATE addressbooknew.person SET state =" + newState + "WHERE first_name = " + firstName + "AND last_name = " + lastName;
+                    this.editDatabase(editQuery);
                     break;
                 case 3:
                     System.out.println("enter new zip");
                     String newZipCode = input.nextLine();
-                    EDIT_QUERY = "UPDATE addressbooknew.person SET zip_code =" + newZipCode + "WHERE first_name = " + firstName + "AND last_name = " + lastName;
-                    this.editDatabase(EDIT_QUERY);
+                    editQuery = "UPDATE addressbooknew.person SET zip_code =" + newZipCode + "WHERE first_name = " + firstName + "AND last_name = " + lastName;
+                    this.editDatabase(editQuery);
                     break;
                 case 4:
                     System.out.println("enter new phone number");
                     String newPhoneNumber = input.nextLine();
-                    EDIT_QUERY = "UPDATE addressbooknew.person SET phone_number =" + newPhoneNumber + "WHERE first_name = " + firstName + "AND last_name = " + lastName;
-                    this.editDatabase(EDIT_QUERY);
+                    editQuery = "UPDATE addressbooknew.person SET phone_number =" + newPhoneNumber + "WHERE first_name = " + firstName + "AND last_name = " + lastName;
+                    this.editDatabase(editQuery);
                     break;
                 case 5:
                     quit = true;
@@ -93,9 +85,9 @@ public class AddressBookDBManager {
         } while (!quit);
     }
 
-    private void editDatabase(String EDIT_QUERY) {
+    private void editDatabase(String editQuery) {
         try (Connection connection = DBConnection.getConnection()) {
-            preparedStatement = connection.prepareStatement(EDIT_QUERY);
+            preparedStatement = connection.prepareStatement(editQuery);
             preparedStatement.executeUpdate();
             preparedStatement.close();
         } catch (SQLException e) {
@@ -108,9 +100,9 @@ public class AddressBookDBManager {
         String firstName = input.nextLine();
         System.out.println("enter last name of person ");
         String lastName = input.nextLine();
-        String DELETE_QUERY = "DELETE FROM addressbooknew.person WHERE first_name = " +firstName+ "AND last_name = " +lastName;
+        String deleteQuery = "DELETE FROM addressbooknew.person WHERE first_name = " +firstName+ "AND last_name = " +lastName;
         try (Connection connection = DBConnection.getConnection()) {
-            preparedStatement = connection.prepareStatement(DELETE_QUERY);
+            preparedStatement = connection.prepareStatement(deleteQuery);
             preparedStatement.executeUpdate();
             preparedStatement.close();
         } catch (SQLException e) {
@@ -119,10 +111,10 @@ public class AddressBookDBManager {
     }
 
     public void sortByName() {
-        String SORT_QUERY_BY_NAME = "SELECT * FROM addressbooknew.person ORDER BY first_name ASC";
-        this.displayAddressBook(SORT_QUERY_BY_NAME);
+        String sortQueryByName = "SELECT * FROM addressbooknew.person ORDER BY first_name ASC";
+        this.displayAddressBook(sortQueryByName);
         try (Connection connection = DBConnection.getConnection()) {
-            preparedStatement = connection.prepareStatement(SORT_QUERY_BY_NAME);
+            preparedStatement = connection.prepareStatement(sortQueryByName);
             preparedStatement.executeUpdate();
             preparedStatement.close();
         } catch (SQLException e) {
@@ -131,10 +123,10 @@ public class AddressBookDBManager {
     }
 
     public void sortByCity() {
-        String SORT_QUERY_BY_CITY = "SELECT * FROM addressbooknew.person ORDER BY city ASC";
-        this.displayAddressBook(SORT_QUERY_BY_CITY);
+        String sortQueryByCity = "SELECT * FROM addressbooknew.person ORDER BY city ASC";
+        this.displayAddressBook(sortQueryByCity);
         try (Connection connection = DBConnection.getConnection()) {
-            preparedStatement = connection.prepareStatement(SORT_QUERY_BY_CITY);
+            preparedStatement = connection.prepareStatement(sortQueryByCity);
             preparedStatement.executeUpdate();
             preparedStatement.close();
         } catch (SQLException e) {
@@ -143,10 +135,10 @@ public class AddressBookDBManager {
     }
 
     public void sortByState() {
-        String SORT_QUERY_BY_STATE = "SELECT * FROM addressbooknew.person ORDER BY state ASC";
-        this.displayAddressBook(SORT_QUERY_BY_STATE);
+        String sortQueryByState = "SELECT * FROM addressbooknew.person ORDER BY state ASC";
+        this.displayAddressBook(sortQueryByState);
         try (Connection connection = DBConnection.getConnection()) {
-            preparedStatement = connection.prepareStatement(SORT_QUERY_BY_STATE);
+            preparedStatement = connection.prepareStatement(sortQueryByState);
             preparedStatement.executeUpdate();
             preparedStatement.close();
         } catch (SQLException e) {
@@ -155,10 +147,10 @@ public class AddressBookDBManager {
     }
 
     public void sortByZipCode() {
-        String SORT_QUERY_BY_ZIPCODE = "SELECT * FROM addressbooknew.person ORDER BY zip_code ASC";
-        this.displayAddressBook(SORT_QUERY_BY_ZIPCODE);
+        String sortQueryByZipcode = "SELECT * FROM addressbooknew.person ORDER BY zip_code ASC";
+        this.displayAddressBook(sortQueryByZipcode);
         try (Connection connection = DBConnection.getConnection()) {
-            preparedStatement = connection.prepareStatement(SORT_QUERY_BY_ZIPCODE);
+            preparedStatement = connection.prepareStatement(sortQueryByZipcode);
             preparedStatement.executeUpdate();
             preparedStatement.close();
         } catch (SQLException e) {
@@ -185,10 +177,10 @@ public class AddressBookDBManager {
     }
 
     public void displayAll() {
-        String DISPLAY_QUERY = "SELECT * FROM addressbooknew.person";
-        this.displayAddressBook(DISPLAY_QUERY);
+        String displayQuery = "SELECT * FROM addressbooknew.person";
+        this.displayAddressBook(displayQuery);
         try (Connection connection = DBConnection.getConnection()) {
-            preparedStatement = connection.prepareStatement(DISPLAY_QUERY);
+            preparedStatement = connection.prepareStatement(displayQuery);
             preparedStatement.executeUpdate();
             preparedStatement.close();
         } catch (SQLException e) {

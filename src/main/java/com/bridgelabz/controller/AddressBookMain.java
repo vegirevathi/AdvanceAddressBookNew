@@ -1,5 +1,6 @@
 package com.bridgelabz.controller;
 
+import com.bridgelabz.services.AddressBookDB;
 import com.bridgelabz.services.AddressBookManager;
 import com.bridgelabz.utility.CSVOperations;
 import com.bridgelabz.utility.GSONOperations;
@@ -14,13 +15,14 @@ public class AddressBookMain {
         System.out.println("Welcome to Address Book");
 
         AddressBookManager addressBook = new AddressBookManager();
+        AddressBookDB addressBookDB = new AddressBookDB();
         CSVOperations csvOperations = new CSVOperations();
         csvOperations.start();
         JSONOperations jsonOperations = new JSONOperations();
         jsonOperations.start();
         GSONOperations gsonOperations = new GSONOperations();
         gsonOperations.start();
-        System.out.println("Select Read and Write File Operation/n 1. JSON File /n 2. CSV File /n 3. GSON File");
+        System.out.println("Select Read and Write File Operation/n 1. JSON File /n 2. CSV File /n 3. GSON File /n 4. Database");
         int option = input.nextInt();
         input.nextLine();
         switch (option) {
@@ -33,6 +35,8 @@ public class AddressBookMain {
             case 3:
                 addressBook = new AddressBookManager(gsonOperations, "AddressBookLibrary.json");
                 break;
+            case 4:
+                addressBookDB.operations();
             default:
                 System.out.println("Wrong Entry");
                 break;
